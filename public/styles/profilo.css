@@ -1,0 +1,178 @@
+header{
+    text-align: center;
+}
+
+.main {
+    width: 60%;
+    margin: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.containerImage:hover, button:hover, .caricaAltro:hover, .gifGiphy:hover{
+    cursor: pointer;
+}
+
+.containerImage img{
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    border: solid 2px skyblue;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.userInfo span {
+    font-weight: normal;
+}
+
+@media (max-width: 900px) {
+    .containerImage img{
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        
+    }
+}
+
+#modalGiphy .modal-content{
+    width: 75%;
+    height: 75%;
+}
+
+#modalPassword .modal-content{
+    width: 400px;
+    height: 350px;
+}
+
+#modalConferma .modal-content{
+    width: 400px;
+    height: 350px;
+}
+
+.passwordText{
+    width: 100%;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+#textGiphy{
+    width: 250px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+.divError{
+    text-align: end;
+    color: red;
+    margin: 0 auto;
+    padding: 0;
+    opacity: 0;
+}
+
+.error div{
+    opacity: 1;
+}
+
+.error input{
+    border: 2px solid red;
+}
+
+.passwordContent{
+    width: 100%;
+}
+
+#sendNewPassword{
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    margin:auto;
+
+    width: 40%;
+    height: 50px;
+}
+
+button{
+    background-color: skyblue;
+    color: white;
+    font-weight: bold;
+
+    border: 1px solid lightgray;
+    border-radius: 10px;
+
+    padding: 10px;
+}
+
+.userAction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+img.okcheck{
+    width: 200px;
+    height: 200px;
+}
+
+.disconnettiti{
+    text-decoration: none;
+}
+
+#containerGif{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+
+    width: 90%;
+    height: 80%;
+}
+
+.scroll{
+    overflow-y: scroll;
+}
+
+.gifGiphy{
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+
+    margin:20px
+}
+
+.gifFrame{
+    position: relative;
+}
+
+.caricaAltro {
+    width: 100%;
+    text-align: center;
+
+    color: blue;
+}
+
+.confirmMessage{
+    position: absolute;
+    top: 150px;
+    color: black;
+    font-weight: bold;
+    font-size: 19px;
+    text-align: center;
+}
+

@@ -1,0 +1,193 @@
+body{
+    background-image: url("../img/background.png");
+
+    flex-direction: row;
+
+    height: 100vh;
+}
+
+#main{
+    margin: auto;
+
+    background-color: white;
+    border: 4px solid bisque;
+    border-radius: 20px;
+    width: 50%;
+    
+    padding: 60px 30px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.leftPresentazione{
+    width: 50%;
+    margin-right: 10px;
+}
+
+.leftPresentazione img{
+    width: 100%;
+}
+
+#dati{
+    margin: auto;
+    flex-grow: 3;
+}
+
+form{
+    text-align: center;
+}
+
+input{
+    height: 30px;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+
+    width: 100%;
+    background-color: beige;
+}
+
+input.radio{
+    width: auto;
+    vertical-align: middle;
+}
+
+div.formContent {
+    text-align: start;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.divError{
+    text-align: end;
+    margin: auto;
+    padding: 0;
+    opacity: 0;
+}
+
+.centered{
+    text-align: center;
+}
+
+.error{
+    color: red;
+}
+
+.error div{
+    opacity: 1;
+}
+
+.error input{
+    border: 2px solid red;
+}
+
+#altriCampi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#altriCampi .formContent{
+    width: 90%;
+}
+
+#dataInput{
+    margin-right: 10px;
+}
+#sessoInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#sessoInput input{
+    margin:0;
+}
+
+.serverError{
+    color: red;
+}
+
+.login{
+    text-align: center;
+}
+
+#signupButton #loginButton {
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    #main {
+        width: 75%;
+    }
+}
+
+@media (max-width: 700px) {
+    #main {
+        width: 95%;
+    }
+}
+
+@media (max-width: 600px) {
+    #main {
+        flex-direction: column;
+    }
+
+    .leftPresentazione{
+        width: 90%;
+    }
+}
+
+#slideshow-container{
+    width: 100%;
+    height: 60%;
+    position: relative;
+    margin: auto;
+}
+
+.hidden{
+    display: none;
+}
+
+.slide {
+    padding: 0 50px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: gray;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+.prev{
+    left: 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+  
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+#signupButton:hover, #loginButton:hover {
+    cursor: pointer;
+}
+
+.spaziati{
+    margin: 30px 0;
+}
