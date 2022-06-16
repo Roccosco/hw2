@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Route::get('signup', 'App\Http\Controllers\RegisterController@index');
@@ -26,4 +26,6 @@ Route::get('signout', 'App\Http\Controllers\LoginController@signout');
 
 Route::get('home', 'App\Http\Controllers\HomeController@index');
 Route::get('indovinelli', 'App\Http\Controllers\IndovinelliController@index');
+Route::get('indovinello/{id}', 'App\Http\Controllers\IndovinelliController@indexID');
 Route::get('profilo', 'App\Http\Controllers\ProfiloController@index');
+Route::get('profilo/{username}', 'App\Http\Controllers\ProfiloController@indexUsername');

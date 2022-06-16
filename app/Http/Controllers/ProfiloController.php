@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller;
 
@@ -11,6 +12,19 @@ class ProfiloController extends Controller{
     public function index(){
         if(session('username') != null) {
             return view("profilo")->with('user', User::where('username', session('username'))->first());
+        }
+        else {
+            return redirect('login');
+        }
+    }
+
+    public function indexUsername($username){
+        if(session('username') != null) {
+            $user=User::where('username', $username)->first();
+            if($user)
+                return view("profilo")->with('user', $user)->with('view', true);
+            else
+                return redirect('home');
         }
         else {
             return redirect('login');

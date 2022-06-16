@@ -85,6 +85,7 @@ class RegisterController extends Controller{
             $utente->gifProfilo = null;
             $utente->save();
 
+            Session::put('username', $username);
             return redirect('home');
         }
         

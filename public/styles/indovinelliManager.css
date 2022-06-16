@@ -1,0 +1,163 @@
+.indovinelloContainer{
+
+    margin:25px 0px;
+
+    border: 2px solid rgb(140, 140, 140);
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.indovinelloTesto{
+    text-align: justify;
+
+    width: 90%;
+    margin:auto;
+    margin-bottom: 10px;
+}
+
+
+.indovinelloTitle{
+    text-align: center;
+    max-width: 75%;
+    margin: 10px auto;
+
+}
+
+.indovinelloAuthor{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.indovinelloImage{
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+}
+
+.separatore{
+    width: 90%;
+    height: 1px;
+    background-color: gray;
+    margin:auto;
+}
+
+.commentiFrame{
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 90%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.commentiFrame:hover{
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+.commento, .commentoSorrisi, .indovinelloDettagli{
+    text-align: start;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.indovinelloDettagli{
+    justify-content: space-between;
+    margin:auto;
+    width: 90%;
+}
+
+.commentoSorrisi {
+    min-width: max-content;
+}
+
+.commentoImage{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.commentoInfo{
+    margin: 10px;
+}
+
+.commentoUsername{
+    margin-right: 5px;
+}
+
+.commentoInfo p {
+    margin: 5px;
+}
+
+.data{
+    font-style: italic;
+}
+
+.sorriso{
+    width: 30px;
+    height: 30px;
+}
+
+.nlike, .authorName{
+    display: inline;
+    margin: auto 10px;
+    font-weight: bold;
+}
+
+.caricaAltro{
+    color: blue;
+    margin: 10px 0;
+}
+
+.caricaAltro:hover, .commentaButton:hover, .sorriso:hover, .options button:hover{
+    cursor: pointer;
+}
+
+.commenta{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+
+    width: 90%;
+    margin: 20px auto;
+    
+}
+
+.commentaText{
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    height: 50px;
+    width: 90%;
+
+    font-size: 15px;
+}
+
+.commentaText:focus, .commentaText:hover, .options button:hover{
+    border: 2px solid black;
+}
+
+.commentaButton{
+    border: 2px solid lightblue;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: blue;
+    color: white;
+    height: 40px;
+}
+
+.hidden{
+    display: none;
+}
+
+#newPost{
+    margin: 20px;
+}

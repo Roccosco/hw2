@@ -1,11 +1,16 @@
 @extends('layouts.base')
 
+@section('links')
+    <script src="{{ url('scripts/time.js') }}" defer="true"></script>
+    <script src="{{ url('scripts/notifiche.js') }}" defer="true"></script>
+@endsection
+
 @section('main')
 
     <main>
             <nav>
                 <div>
-                    <img class="logo" src="img/LogoBeige.png">
+                    <img class="logo" src="{{ url('img/LogoBeige.png') }}">
                 </div>
 
                 @yield('nav')

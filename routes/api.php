@@ -26,11 +26,15 @@ Route::post('addCommento', 'App\Http\Controllers\CommentiController@addCommento'
 Route::post('addSorriso', 'App\Http\Controllers\CommentiController@addSorriso');
 Route::post('deleteSorriso', 'App\Http\Controllers\CommentiController@deleteSorriso');
 
+Route::get('getIndovinello', 'App\Http\Controllers\IndovinelliController@getIndovinello');
 Route::get('getIndovinelli', 'App\Http\Controllers\IndovinelliController@getIndovinelli');
 Route::get('getIndovinelliPreview', 'App\Http\Controllers\IndovinelliController@getPreview');
 Route::post('addIndovinello', 'App\Http\Controllers\IndovinelliController@addIndovinello');
 
-Route::get('giphyAPI', 'App\Http\Controllers\ProfiloController@giphyAPI'); //
-Route::post('modifyPassword', 'App\Http\Controllers\ProfiloController@modifyPassword'); //
-Route::post('modifyProfileImage', 'App\Http\Controllers\ProfiloController@modifyProfileImage'); //
+Route::get('giphyAPI', 'App\Http\Controllers\ProfiloController@giphyAPI');
+Route::post('modifyPassword', 'App\Http\Controllers\ProfiloController@modifyPassword'); 
+Route::post('modifyProfileImage', 'App\Http\Controllers\ProfiloController@modifyProfileImage');
+
+Route::get('getNotifiche', 'App\Http\Controllers\NotificheController@getNotifiche');
+Route::post('readNotifica', 'App\Http\Controllers\NotificheController@readNotifica');
 

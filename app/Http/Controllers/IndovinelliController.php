@@ -18,6 +18,18 @@ class IndovinelliController extends Controller{
         }
     }
 
+    public function indexID($id){
+        if(session('username') != null) {
+            $indovinello=Riddle::where('id', $id)->first();
+            if($indovinello)
+                return view("indovinello")->with('indovinelloId', $id);
+            else
+                return redirect('home');
+        }
+        else
+            return redirect('login');
+    }
+
     public function addIndovinello(){
             
         if(session('username')==null)
@@ -46,6 +58,21 @@ class IndovinelliController extends Controller{
         return Riddle::where('stato', 'ACCETTATO')->orderBy('sorrisi', 'DESC')->limit(10)->get(['titolo', 'descrizione']);
     }
 
+    public function getIndovinello(){
+        if(session('username') == null)
+            return;
+        
+        if(request('id', -1) === -1)
+            return;
+
+        $id=request('id');
+
+        return Riddle::with(['user' => function ($query) {
+            $query->select('username', 'gifProfilo');
+        }])
+        ->where('id', $id)->first();
+    }
+
     public function getIndovinelli(){
         if(session('username') == null)
             return;
@@ -62,65 +89,63 @@ class IndovinelliController extends Controller{
 
             return $indovinelli;
         }
-        else if(request('utente') != null){
-            $utente = request('utente');
-            if(request('minSorrisi') != null && request('maxTimeStamp') != null){
-                $minSorrisi = request('minSorrisi');
-                $maxTimeStamp = request('maxTimeStamp');
-
-                //AND (I.Sorrisi<".$minSorrisi." OR (I.Sorrisi=".$minSorrisi." AND I.Data>'".$maxDate."'))
-                $indovinelli = $query
-                    ->where('utente', $utente)
-                    ->where('stato', 'ACCETTATO')
-                    ->where(function ($query) use ($minSorrisi, $maxTimeStamp) {
-                        $query->where('sorrisi', '<', $minSorrisi)
-                            ->orWhere(function ($query2) use($minSorrisi, $maxTimeStamp){
-                                $query2->where('sorrisi', $minSorrisi)
-                                ->where('created_at', '>', $maxTimeStamp);
-                            }
-                        );
-                    })
-                    ->orderBy('sorrisi', 'DESC')->orderby('created_at')->limit(10)->get();
-    
-                return $indovinelli;
-            }
-            else{
-                $indovinelli = $query
-                    ->where('utente', $utente)
-                    ->where('stato', 'ACCETTATO')
-                    ->orderBy('sorrisi', 'DESC')->orderby('created_at')->limit(10)->get();
-
-                return $indovinelli;
-            }
-        }
         else {
-            if(request('minSorrisi') != null && request('maxTimeStamp') != null){
-                $minSorrisi = request('minSorrisi');
-                $maxTimeStamp = request('maxTimeStamp');
+            if(request('utente') != null){
+                $utente = request('utente');
+                if(request('minTimeStamp') != null){
+                    $minTimeStamp = request('minTimeStamp');
+                    $minDate = date('Y-m-d H:i:s', $minTimeStamp);
 
-                $indovinelli = $query
-                    ->where('utente', 'not like', $username)
-                    ->where('stato', 'ACCETTATO')
-                    ->where(function ($query) use ($minSorrisi, $maxTimeStamp) {
-                        $query->where('sorrisi', '<', $minSorrisi)
-                            ->orWhere(function ($query2) use($minSorrisi, $maxTimeStamp){
-                                $query2->where('sorrisi', $minSorrisi)
-                                ->where('created_at', '>', $maxTimeStamp);
-                            }
-                        );
-                    })
-                    ->orderBy('sorrisi', 'DESC')->orderby('created_at')->limit(10)->get();
-    
-                return $indovinelli;
-            }
-            else{
-                $indovinelli = $query
-                    ->where('utente', 'not like', $username)
-                    ->where('stato', 'ACCETTATO')
-                    ->orderBy('sorrisi', 'DESC')->orderby('created_at')->limit(10)->get();
+                    return $query
+                        ->where('utente', $utente)
+                        ->where('stato', 'ACCETTATO')
+                        ->where('created_at', '<', $minDate)
+                        ->orderby('created_at', 'DESC')->limit(10)->get();
 
-                return $indovinelli;
+                }
+                else
+                    return $query
+                        ->where('utente', $utente)
+                        ->where('stato', 'ACCETTATO')
+                        ->orderby('created_at', 'DESC')->limit(10)->get();
             }
+            else {
+                if(request('minSorrisi') != null && request('minTimeStamp') != null){
+                    $minSorrisi = request('minSorrisi');
+                    $minTimeStamp = request('minTimeStamp');
+                    $minDate = date('Y-m-d H:i:s', $minTimeStamp);
+
+                    $query = $query
+                        ->where('utente', 'not like', $username)
+                        ->where('stato', 'ACCETTATO');
+
+                    if(request('new', 0) == 0)
+                        $query = $query
+                            ->where(function ($query) use ($minSorrisi, $minDate) {
+                                $query->where('sorrisi', '<', $minSorrisi)
+                                    ->orWhere(function ($query2) use($minSorrisi, $minDate){
+                                        $query2->where('sorrisi', $minSorrisi)
+                                        ->where('created_at', '<', $minDate);
+                                    }
+                                );
+                            });
+                    else
+                        $query = $query->where('created_at', '<', $minDate);
+                }
+                else
+                    $query = $query
+                        ->where('utente', 'not like', $username)
+                        ->where('stato', 'ACCETTATO');
+            }
+
+            $indovinelli = array();
+            
+            if(request('new', 0) != 0)
+                $indovinelli = $query->orderby('created_at', 'DESC')->limit(10)->get();
+            else
+                $indovinelli = $query->orderBy('sorrisi', 'DESC')->orderby('created_at', 'DESC')->limit(10)->get();
+
+            return $indovinelli;
         }
     }
 

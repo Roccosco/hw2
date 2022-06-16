@@ -4,13 +4,13 @@
 
 @section('links')
 @parent
-<script src="scripts/signup.js" defer="true"></script>
+<script src="{{ url('scripts/signup.js') }}" defer="true"></script>
 @endsection
 
 @section('mainSection')
             <div class="leftPresentazione">
                 <div>
-                    <img src="img/Logo.png">
+                    <img src="{{ url('img/Logo.png') }}">
                 </div>
                 <div id="slideshow-container">
                     <a class="prev">&#10094;</a>
@@ -87,7 +87,7 @@
                     <input id = "signupButton" type="submit" value="Signup!" disabled=true>
                 </form>
                 <div class="login">
-                    Hai già un account? <a href="login">Accedi</a>
+                    Hai già un account? <a href="{{ url('login') }}">Accedi</a>
                 </div>
             </div>
 @endsection

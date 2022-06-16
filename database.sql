@@ -62,18 +62,6 @@ create table smiles(
     foreign key(commento) references commenti(id) on delete cascade on update cascade
 ) engine=INNODB;
 
-create table notifications(
-    id integer primary key AUTO_INCREMENT,
-    utente varchar(64),
-    testo integer,
-
-    created_at timestamp NOT NULL default 0,
-    updated_at timestamp NOT NULL default 0,
-
-    index Utente(utente),
-    foreign key(utente) references utenti(username) on delete cascade on update cascade
-) engine=INNODB;
-
 delimiter //
 create trigger addSorriso
 after insert on smiles

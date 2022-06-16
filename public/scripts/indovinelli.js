@@ -4,6 +4,8 @@ function fetchIndovinelli(){
         if(risposta.ok)
             return risposta.json();
     }).then((json)=>{
+        if(json.length == 0)
+            document.querySelector('#noIndovinelli').classList.remove('hidden');
         for(const indovinello of json)
             createIndovinello(indovinello);
     });
@@ -96,6 +98,7 @@ function addIndovinello(event){
         soluzione.value="";
 
         closeModal();
+        document.querySelector('#noIndovinelli').classList.add('hidden');
         
     });
 }

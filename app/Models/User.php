@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    
-    protected $primaryKey = "";
+    protected $primaryKey = "username";
     protected $autoIncrement = false;
     protected $keyType = "string";
 

@@ -10,3 +10,8 @@ function getStringTimeAgo(data){
         return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + " giorni fa";
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365))+ " anni fa"; 
 }
+
+function toTimeStamp(dateString){
+    let date = Date.parse(dateString);
+    return date/1000;
+}

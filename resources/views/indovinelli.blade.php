@@ -3,9 +3,9 @@
 @section('titolo', 'Indovinelli')
 
 @section('links')
-    <link rel="stylesheet" href="styles/indovinelli.css"/>
-    <script src="scripts/time.js" defer="true"></script>
-    <script src="scripts/indovinelli.js" defer="true"></script>
+    @parent
+    <link rel="stylesheet" href="{{ url('styles/indovinelli.css') }}"/>
+    <script src="{{ url('scripts/indovinelli.js') }}" defer="true"></script>
 @endsection
 
 @section('header')
@@ -14,9 +14,19 @@
 
 @section('nav')
 <div class="navbuttons">
-                <a class="other" href="home">Home</a>
+                <a class="other" href="{{ url('home') }}">Home</a>
                 <div id="navbuttons" > 
-                    <a class="button" href="profilo">Profilo</a>
+                    <div id="notificheOpen">
+                        <span class="material-symbols-outlined">
+                            notifications
+                        </span>
+                        <div id="numNotifiche" class="hidden"></div>
+
+                        <div id="notificheContainer" class="hidden">
+                        </div>
+                    </div>
+
+                    <a class="button" href="{{ url('profilo') }}">Profilo</a>
                 </div>
             </div>
 @endsection
@@ -27,6 +37,7 @@
                 <button id="showModal">
                     <span>+</span>
                 </button>
+                <div id='noIndovinelli' class='hidden'>Non hai ancora postato indovinelli</div>
             </div>
         </section>
 

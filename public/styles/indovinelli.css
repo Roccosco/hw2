@@ -42,9 +42,13 @@ section{
     font-size: 25px;
 }
 
+#noIndovinelli{
+    margin-bottom: 15px;
+}
+
 .indovinelloContainer{
 
-    margin:10px 0px;
+    margin:10px 10px;
     padding: 20px;
 
     border: 2px solid rgb(140, 140, 140);
@@ -151,4 +155,11 @@ section{
 .hidden
 {
     display: none;
+}
+
+
+@media (max-width: 500px) {
+    #modalIndovinelli .modal-content{
+        width: 250px;
+    }
 }

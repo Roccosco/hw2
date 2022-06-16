@@ -1,125 +1,141 @@
 const errori = {};
 
-function checkName(event){
-    const input=event.currentTarget;
-    
-    if (input.value.length == 0) {
-        input.parentNode.classList.add('error');
-        errori[input.name] = 1;
+function checkName(currentTarget) {    
+    if (currentTarget.value.length == 0) {
+        currentTarget.parentNode.classList.add('error');
+        errori[currentTarget.name] = 1;
     } else {
-        input.parentNode.classList.remove('error');
-        errori[input.name] = 0;
+        currentTarget.parentNode.classList.remove('error');
+        errori[currentTarget.name] = 0;
     }
     switchButton();
 }
 
-function checkUsername(event){
-    const input = event.currentTarget;
+function checkNameEvent(event){
+    checkName(event.currentTarget);
+}
 
-    if(!/^[a-zA-Z0-9_]{1,64}$/.test(input.value)) {
-        input.parentNode.querySelector('.divError').innerText="Inserisci solo lettere, numeri e underscore. Max. 64";
-        input.parentNode.classList.add('error');
-        errori[input.name] = 1;
+function checkUsername(currentTarget) {    
+    if(!/^[a-zA-Z0-9_]{1,64}$/.test(currentTarget.value)) {
+        currentTarget.parentNode.querySelector('.divError').innerText="Inserisci solo lettere, numeri e underscore. Max. 64";
+        currentTarget.parentNode.classList.add('error');
+        errori[currentTarget.name] = 1;
+        switchButton();
     } else {
-        const apiUrl="api/checkUsername?username="+encodeURIComponent(input.value);
+        const apiUrl="api/checkUsername?username="+encodeURIComponent(currentTarget.value);
         fetch(apiUrl).then((risposta) => 
         {
             if(risposta.ok)
                 return risposta.text();
         }).then((text)=>{
             if(text=='1'){
-                input.parentNode.classList.remove('error');
-                errori[input.name] = 0;
+                currentTarget.parentNode.classList.remove('error');
+                errori[currentTarget.name] = 0;
             }
             else{
-                input.parentNode.querySelector('.divError').innerText="Username già in uso";
-                input.parentNode.classList.add('error');
-                errori[input.name] = 1;
+                currentTarget.parentNode.querySelector('.divError').innerText="Username già in uso";
+                currentTarget.parentNode.classList.add('error');
+                errori[currentTarget.name] = 1;
             }
             switchButton();
         });
     }
-    switchButton();
 }
 
-function checkPassword(event){
-    const input = event.currentTarget;
+function checkUsernameEvent(event){
+   checkUsername(event.currentTarget);
+}
 
-    if(input.value.length < 8) {
-        input.parentNode.querySelector('.divError').innerText="La password deve contenere almeno 8 caratteri";
-        input.parentNode.classList.add('error');
-        errori[input.name] = 1;
+function checkPassword(currentTarget, conferma){
+    if(currentTarget.value.length < 8) {
+        currentTarget.parentNode.querySelector('.divError').innerText="La password deve contenere almeno 8 caratteri";
+        currentTarget.parentNode.classList.add('error');
+        errori[currentTarget.name] = 1;
     }
-    else if(!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(input.value)){
-        input.parentNode.querySelector('.divError').innerText="La password deve contenere almeno un numero e un carattere";
-        input.parentNode.classList.add('error');
-        errori[input.name] = 1;
+    else if(!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(currentTarget.value)){
+        currentTarget.parentNode.querySelector('.divError').innerText="La password deve contenere almeno un numero e un carattere";
+        currentTarget.parentNode.classList.add('error');
+        errori[currentTarget.name] = 1;
     }
     else{
-        input.parentNode.classList.remove('error');
-        errori[input.name] = 0;
+        currentTarget.parentNode.classList.remove('error');
+        errori[currentTarget.name] = 0;
     }
+
+    if(conferma.value.length>0)
+        checkConferma(conferma, currentTarget);
+
     switchButton();
 }
 
-function checkConferma(event){
-    const input = event.currentTarget;
-    const password = document.querySelector('#password').value;
+function checkPasswordEvent(event){
+    checkPassword(event.currentTarget, conferma);
+}
 
-    if(input.value !== password){
-        input.parentNode.classList.add('error');
-        errori[input.name] = 1;
+function checkConferma(currentTarget, password){
+    if(currentTarget.value !== password.value){
+        currentTarget.parentNode.classList.add('error');
+        errori[currentTarget.name] = 1;
     }
     else{
-        input.parentNode.classList.remove('error');
-        errori[input.name] = 0;
+        currentTarget.parentNode.classList.remove('error');
+        errori[currentTarget.name] = 0;
     }
     switchButton();
 }
 
-function checkEmail(event){
-    const input = event.currentTarget;
+function checkConfermaEvent(event){
+    checkConferma(event.currentTarget, password);   
+}
 
-    if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(input.value).toLowerCase())) {
-        input.parentNode.querySelector('.divError').innerText="Email non valida";
-        input.parentNode.classList.add('error');
-        errori[input.name] = 1;
+function checkEmail(currentTarget){
+    if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(currentTarget.value).toLowerCase())) {
+        currentTarget.parentNode.querySelector('.divError').innerText="Email non valida";
+        currentTarget.parentNode.classList.add('error');
+        errori[currentTarget.name] = 1;
+        switchButton();
     } else {
-        const apiUrl="api/checkEmail?email="+encodeURIComponent(input.value);
+        const apiUrl="api/checkEmail?email="+encodeURIComponent(currentTarget.value);
         fetch(apiUrl).then((risposta) => 
         {
             if(risposta.ok)
                 return risposta.text();
         }).then((text)=>{
             if(text=='1'){
-                input.parentNode.classList.remove('error');
-                errori[input.name] = 0;
+                currentTarget.parentNode.classList.remove('error');
+                errori[currentTarget.name] = 0;
             }
             else{
-                input.parentNode.querySelector('.divError').innerText="Email già in uso";
-                input.parentNode.classList.add('error');
-                errori[input.name] = 1;
+                currentTarget.parentNode.querySelector('.divError').innerText="Email già in uso";
+                currentTarget.parentNode.classList.add('error');
+                errori[currentTarget.name] = 1;
             }
             switchButton();
         });
     }
-    switchButton();
 }
 
-function dataNascita(event){
-    const input = event.currentTarget;
-    const date = new Date(input.value);
+function checkEmailEvent(event){
+    checkEmail(event.currentTarget);
+}
+
+function checkDataNascita(currentTarget){
+    const date = new Date(currentTarget.value);
 
     if(isNaN(date.getTime()) || date >= new Date()){
-        input.parentNode.classList.add('error');
-        errori[input.name] = 1;
+        currentTarget.parentNode.classList.add('error');
+        errori[currentTarget.name] = 1;
     }
     else{
-        input.parentNode.classList.remove('error');
-        errori[input.name] = 0;
+        currentTarget.parentNode.classList.remove('error');
+        errori[currentTarget.name] = 0;
     }
 
     switchButton();
+}
+
+function checkDataNascitaEvent(event){
+    checkDataNascita(event.currentTarget);   
 }
 
 function switchButton() {
@@ -188,12 +204,30 @@ function prevSlide(){
     showSlides();
 }
 
-document.querySelector('#nome').addEventListener('blur', checkName);
-document.querySelector('#username').addEventListener('blur', checkUsername);
-document.querySelector('#password').addEventListener('blur', checkPassword);
-document.querySelector('#conferma').addEventListener('blur', checkConferma);
-document.querySelector('#email').addEventListener('blur', checkEmail);
-document.querySelector('#dataNascita').addEventListener('blur', dataNascita);
+const nome = document.querySelector('#nome');
+nome.addEventListener('blur', checkNameEvent);
+if(nome.value.length>0)
+    checkName(nome);
+const username = document.querySelector('#username');
+username.addEventListener('blur', checkUsernameEvent);
+if(username.value.length>0)
+    checkUsername(username);
+const password=document.querySelector('#password');
+const conferma=document.querySelector('#conferma');
+password.addEventListener('blur', checkPasswordEvent);
+if(password.value.length>0)
+    checkPassword(password, conferma);
+conferma.addEventListener('blur', checkConfermaEvent);
+if(conferma.value.length>0)
+    checkConferma(conferma, password);
+const email=document.querySelector('#email');
+email.addEventListener('blur', checkEmailEvent);
+if(email.value.length>0)
+    checkEmail(email);
+const dataNascita=document.querySelector('#dataNascita');
+dataNascita.addEventListener('blur', checkDataNascitaEvent);
+if(dataNascita.value.length>0)
+    checkDataNascita(dataNascita);
 
 let nIndovinelli;
 let indexSlide=0;

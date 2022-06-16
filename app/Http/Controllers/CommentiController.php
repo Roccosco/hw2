@@ -36,6 +36,8 @@ class CommentiController extends Controller{
         $commento->sorrisi = 0;
         $commento->save();
         
+        NotificheController::addNotificaCommento($commento->id);
+
         return array(
             'id' => $commento->id,
             'utente' => $commento->utente,
@@ -58,27 +60,28 @@ class CommentiController extends Controller{
             $query->select('username', 'gifProfilo');
         }, 'userSmiles' => function (){}]);
 
-        if(request('minSorrisi') != null && request('maxTimeStamp') != null){
+        if(request('minSorrisi') != null && request('minTimeStamp') != null){
             $minSorrisi = request('minSorrisi');
-            $maxTimeStamp = request('maxTimeStamp');
+            $minTimeStamp = request('minTimeStamp');
+            $minDate = date('Y-m-d H:i:s', $minTimeStamp);
 
             $commenti = $query
                 ->where('indovinello', $indovinello)
-                ->where(function ($query) use ($minSorrisi, $maxTimeStamp) {
+                ->where(function ($query) use ($minSorrisi, $minDate) {
                     $query->where('sorrisi', '<', $minSorrisi)
-                        ->orWhere(function ($query2) use($minSorrisi, $maxTimeStamp){
+                        ->orWhere(function ($query2) use($minSorrisi, $minDate){
                             $query2->where('sorrisi', $minSorrisi)
-                            ->where('created_at', '>', $maxTimeStamp);
+                            ->where('created_at', '<', $minDate);
                         }
                     );
                 })
-                ->orderBy('sorrisi', 'DESC')->orderby('created_at')->limit(10)->get();
+                ->orderBy('sorrisi', 'DESC')->orderby('created_at', 'DESC')->limit(10)->get();
 
         }
         else{
             $commenti = $query
                 ->where('indovinello', $indovinello)
-                ->orderBy('sorrisi', 'DESC')->orderby('created_at')->limit(10)->get();
+                ->orderBy('sorrisi', 'DESC')->orderby('created_at', 'DESC')->limit(10)->get();
 
         }
 

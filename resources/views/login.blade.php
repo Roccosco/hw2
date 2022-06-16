@@ -4,13 +4,13 @@
 
 @section('links')
 @parent
-<script src="scripts/login.js" defer="true"></script>
+<script src="{{ url('scripts/login.js') }}" defer="true"></script>
 @endsection
 
 
 @section('mainSection')
             <div class="leftPresentazione">
-                <img src="img/Logo.png">
+                <img src="{{ url('img/Logo.png') }}">
             </div>
             <form name="login" method='post'>
                 <h3>Accedi</h3>
@@ -37,7 +37,7 @@
                 </div>
                 
                 <div class="login">
-                    Non hai un account? <a href="signup">Registrati</a>
+                    Non hai un account? <a href=" {{ url('signup') }}">Registrati!</a>
                 </div>
                 
             </form>

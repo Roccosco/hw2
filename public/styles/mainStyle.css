@@ -28,6 +28,74 @@ nav a{
     text-decoration: none;
 }
 
+#campanella{
+   height: 30px;
+   width: 30px;
+} 
+
+#notificheOpen{
+    position: relative;
+    margin:0 20px;
+}
+
+#notificheOpen span:hover{
+    cursor:pointer;
+}
+
+#numNotifiche{
+    position: absolute;
+    left: 0;
+    top:0;
+
+    background-color: red;
+    color: black;
+    width: 14px;
+    height: 14px;
+
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    margin:auto;
+    padding: 0;
+
+    border-radius: 7px;
+}
+
+#notificheContainer{
+    position:absolute;
+    left:-150px;
+    top:50px;
+    width: 250px;
+    height: 400px;
+
+    z-index: 1;
+
+    background-color: white;
+    color: black;
+
+    border: 3px solid black;
+    border-radius: 10px;
+
+    overflow-y: scroll;
+}
+
+.notificaFrame{
+    padding: 10px;
+    margin:10px;
+    border: 2px solid black;
+}
+
+.notificaLetta
+{
+    background-color: lightgray;
+}
+
+.notificaMessaggio{
+    margin:10px;
+    color: black;
+    font-size: 13px;
+}
+
 body{
     font-family: 'Playfair Display', serif;
     
@@ -56,6 +124,10 @@ main{
     width: 100%;
 }
 
+#navbuttons{
+    display: flex;
+    flex-direction: row;
+}
 
 #burger {
     display: none;
