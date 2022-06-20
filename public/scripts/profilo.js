@@ -270,16 +270,16 @@ function checkConferma(password, conferma){
 }
 
 function modificaPassword(event){
-    const oldPassword = document.querySelector('#oldPassword').value;
-    const password = document.querySelector('#newPassword').value;
-    const conferma = document.querySelector('#confirmPassword').value;
+    const oldPassword = document.querySelector('#oldPassword');
+    const password = document.querySelector('#newPassword');
+    const conferma = document.querySelector('#confirmPassword');
     
-    if(!checkPassword(password) || !checkConferma(password, conferma))
+    if(!checkPassword(password.value) || !checkConferma(password.value, conferma.value))
         return;
 
     const formData = new FormData();
-    formData.append('oldPassword', oldPassword);
-    formData.append('newPassword', conferma);
+    formData.append('oldPassword', oldPassword.value);
+    formData.append('newPassword', conferma.value);
 
     fetch("api/modifyPassword", {method: 'post', body: formData}).then((risposta) => 
     {
@@ -290,6 +290,11 @@ function modificaPassword(event){
             document.querySelector("#oldPasswordContent").classList.add('error');
         else{
             closeModalePassword();
+
+            oldPassword.value="";
+            password.value="";
+            conferma.value="";
+
             showModaleConferma();
         }
     });

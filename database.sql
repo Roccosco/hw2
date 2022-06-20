@@ -55,9 +55,6 @@ create table smiles(
     utente varchar(64),
     commento integer,
 
-    created_at timestamp NOT NULL default 0,
-    updated_at timestamp NOT NULL default 0,
-
     index Utente(utente),
     index Commento(commento),
     foreign key(utente) references users(username) on delete cascade on update cascade,

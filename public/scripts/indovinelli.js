@@ -94,6 +94,7 @@ function addIndovinello(event){
 
         createIndovinello(json);
 
+        titolo.value="";
         descrizione.value="";
         soluzione.value="";
 
