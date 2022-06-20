@@ -2,6 +2,8 @@ create database riddlerLaravel;
 
 use riddlerLaravel;
 
+SET SQL_MODE='ALLOW_INVALID_DATES';
+
 create table users(
     username varchar(64) primary key,
     email varchar(64) unique,
@@ -59,7 +61,7 @@ create table smiles(
     index Utente(utente),
     index Commento(commento),
     foreign key(utente) references users(username) on delete cascade on update cascade,
-    foreign key(commento) references commenti(id) on delete cascade on update cascade
+    foreign key(commento) references comments(id) on delete cascade on update cascade
 ) engine=INNODB;
 
 delimiter //
