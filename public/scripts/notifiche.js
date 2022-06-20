@@ -14,6 +14,9 @@ function fetchNotifiche() {
     }).then((json)=>{
         let nonLette=0;
 
+        if(json.length==0)
+            noNotifiche();
+
         for(let notifica of json){
             if(!notificheID.includes(notifica['_id'])){
                 notificheID.push(notifica['_id']);
@@ -33,6 +36,13 @@ function fetchNotifiche() {
             numNotifiche.innerText=nonLette;
         }
     });
+}
+
+function noNotifiche(){
+    const msg = document.createElement('p');
+    msg.innerText="Nessuna notifica";
+    msg.classList.add('centered');
+    notificheContainer.appendChild(msg);
 }
 
 function createNotifica(notifica){
